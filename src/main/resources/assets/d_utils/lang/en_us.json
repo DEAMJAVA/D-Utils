@@ -1,0 +1,17 @@
+{
+  "d_utils.config.title": "D Utils - Privacy Protection",
+  "d_utils.config.protection_enabled": "Translation Key Protection",
+  "d_utils.config.protection_enabled.tooltip": "Prevents servers from detecting your mods by blocking translation key leaks in sign, anvil, and book screens.",
+  "d_utils.config.sign_protection": "Sign Screen Protection",
+  "d_utils.config.sign_protection.tooltip": "Blocks servers from reading mod-specific translation keys sent via sign edits.",
+  "d_utils.config.anvil_protection": "Anvil Screen Protection",
+  "d_utils.config.anvil_protection.tooltip": "Blocks servers from detecting mods via item rename translation key resolution.",
+  "d_utils.config.book_protection": "Book Screen Protection",
+  "d_utils.config.book_protection.tooltip": "Prevents mod detection through book text translation keys.",
+  "d_utils.status.enabled": "D Utils: Protection Enabled",
+  "d_utils.status.disabled": "D Utils: Protection Disabled",
+  "d_utils.keybind.toggle": "Toggle D Utils Protection",
+  "d_utils.keybind.category": "D Utils",
+  "d_utils.toast.enabled": "Privacy Protection Enabled",
+  "d_utils.toast.disabled": "Privacy Protection Disabled"
+}

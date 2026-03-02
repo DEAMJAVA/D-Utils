@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.deamjava.d_utils.mixin.client",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "SignEditScreenMixin",
+    "AnvilScreenMixin",
+    "BookEditScreenMixin",
+    "TextFieldWidgetAccessor",
+    "LanguageMixin",
+    "KeyBindingAccessor"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
