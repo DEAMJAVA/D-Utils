@@ -3,13 +3,13 @@
 	"id": "d_utils",
 	"version": "${version}",
 	"name": "D Utils",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "Mod Privacy!",
 	"authors": [
 		"DEAMJAVA"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"homepage": "https://github.com/DEAMJAVA/D-Utils",
+		"sources": "https://github.com/DEAMJAVA/D-Utils"
 	},
 	"license": "CC0-1.0",
 	"icon": "assets/d_utils/icon.png",
