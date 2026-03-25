@@ -2,7 +2,7 @@ package net.deamjava.d_utils.mixin.client;
 
 import net.deamjava.d_utils.config.DUtilsConfig;
 import net.deamjava.d_utils.config.TranslationKeySanitizer;
-import net.minecraft.client.gui.screen.ingame.AbstractSignEditScreen;
+import net.minecraft.client.gui.screens.inventory.AbstractSignEditScreen;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;

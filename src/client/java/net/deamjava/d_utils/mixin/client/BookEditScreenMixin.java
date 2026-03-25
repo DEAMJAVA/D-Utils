@@ -2,7 +2,7 @@ package net.deamjava.d_utils.mixin.client;
 
 import net.deamjava.d_utils.config.DUtilsConfig;
 import net.deamjava.d_utils.config.TranslationKeySanitizer;
-import net.minecraft.client.gui.screen.ingame.BookEditScreen;
+import net.minecraft.client.gui.screens.inventory.BookEditScreen;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
@@ -25,11 +25,13 @@ import java.util.stream.Collectors;
 @Mixin(BookEditScreen.class)
 public abstract class BookEditScreenMixin {
 
+    // TODO(Ravel): wildcard and regex target are not supported
+// TODO(Ravel): wildcard and regex target are not supported
     @ModifyArg(
             method = "*",
             at = @At(
                     value = "INVOKE",
-                    target = "net/minecraft/network/packet/c2s/play/BookUpdateC2SPacket.<init>(ILjava/util/List;Ljava/util/Optional;)V"
+                    target = "Lnet/minecraft/network/protocol/game/ServerboundEditBookPacket;<init>(ILjava/util/List;Ljava/util/Optional;)V"
             ),
             index = 1
     )

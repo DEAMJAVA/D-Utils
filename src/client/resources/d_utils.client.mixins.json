@@ -7,9 +7,9 @@
     "SignEditScreenMixin",
     "AnvilScreenMixin",
     "BookEditScreenMixin",
-    "TextFieldWidgetAccessor",
+    "EditBoxAccessor",
     "LanguageMixin",
-    "KeyBindingAccessor"
+    "KeyMappingAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

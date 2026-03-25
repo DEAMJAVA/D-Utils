@@ -2,18 +2,18 @@ package net.deamjava.d_utils
 
 import net.deamjava.d_utils.config.DUtilsConfig
 import net.deamjava.d_utils.gui.DUtilsConfigScreen
-import net.deamjava.d_utils.mixin.client.KeyBindingAccessor
+import net.deamjava.d_utils.mixin.client.KeyMappingAccessor
 import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents
-import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper
-import net.minecraft.client.option.KeyBinding
-import net.minecraft.client.option.KeyBinding.Category
-import net.minecraft.client.toast.SystemToast
-import net.minecraft.client.util.InputUtil
-import net.minecraft.text.Text
-import net.minecraft.util.Identifier
+import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper
+import net.minecraft.client.KeyMapping
+import net.minecraft.client.KeyMapping.Category
+import net.minecraft.client.gui.components.toasts.SystemToast
+import com.mojang.blaze3d.platform.InputConstants
+import net.minecraft.network.chat.Component
+import net.minecraft.resources.Identifier
 import org.lwjgl.glfw.GLFW
 import org.slf4j.LoggerFactory
 
@@ -22,32 +22,32 @@ object DUtilsClient : ClientModInitializer {
 
     val LOGGER = LoggerFactory.getLogger("d_utils")
 
-    private lateinit var openConfigKey: KeyBinding
-    private lateinit var toggleProtectionKey: KeyBinding
+    private lateinit var openConfigKey: KeyMapping
+    private lateinit var toggleProtectionKey: KeyMapping
 
     private var openConfigDownLast = false
     private var toggleProtectionDownLast = false
 
-    private val CATEGORY: Category = Category.create(Identifier.of("d_utils", "main"))
+    private val CATEGORY: Category = Category.register(Identifier.fromNamespaceAndPath("d_utils", "main"))
 
     override fun onInitializeClient() {
         LOGGER.info("D Utils initializing — privacy protection starting up")
 
         DUtilsConfig.load()
 
-        openConfigKey = KeyBindingHelper.registerKeyBinding(
-            KeyBinding(
+        openConfigKey = KeyMappingHelper.registerKeyMapping(
+            KeyMapping(
                 "key.d_utils.open_config",
-                InputUtil.Type.KEYSYM,
+                InputConstants.Type.KEYSYM,
                 GLFW.GLFW_KEY_K,
                 CATEGORY
             )
         )
 
-        toggleProtectionKey = KeyBindingHelper.registerKeyBinding(
-            KeyBinding(
+        toggleProtectionKey = KeyMappingHelper.registerKeyMapping(
+            KeyMapping(
                 "key.d_utils.toggle_protection",
-                InputUtil.Type.KEYSYM,
+                InputConstants.Type.KEYSYM,
                 GLFW.GLFW_KEY_UNKNOWN,
                 CATEGORY
             )
@@ -57,18 +57,18 @@ object DUtilsClient : ClientModInitializer {
 
             val window = client.window  // ✅ FIXED
 
-            val openPressedNow = InputUtil.isKeyPressed(
+            val openPressedNow = InputConstants.isKeyDown(
                 window,
-                (openConfigKey as KeyBindingAccessor).boundKey.code
+                (openConfigKey as KeyMappingAccessor).key.value
             )
 
-            val togglePressedNow = InputUtil.isKeyPressed(
+            val togglePressedNow = InputConstants.isKeyDown(
                 window,
-                (toggleProtectionKey as KeyBindingAccessor).boundKey.code  // ✅ FIXED
+                (toggleProtectionKey as KeyMappingAccessor).key.value  // ✅ FIXED
             )
 
             if (openPressedNow && !openConfigDownLast) {
-                client.setScreen(DUtilsConfigScreen(client.currentScreen))
+                client.setScreen(DUtilsConfigScreen(client.screen))
             }
 
             if (togglePressedNow && !toggleProtectionDownLast) {
@@ -80,12 +80,12 @@ object DUtilsClient : ClientModInitializer {
                     if (cfg.protectionEnabled) "d_utils.toast.enabled"
                     else "d_utils.toast.disabled"
 
-                client.toastManager.add(
-                    SystemToast.create(
+                client.toastManager.addToast(
+                    SystemToast.multiline(
                         client,
-                        SystemToast.Type.NARRATOR_TOGGLE,
-                        Text.literal("D Utils"),
-                        Text.translatable(toastKey)
+                        SystemToast.SystemToastId.NARRATOR_TOGGLE,
+                        Component.literal("D Utils"),
+                        Component.translatable(toastKey)
                     )
                 )
 
