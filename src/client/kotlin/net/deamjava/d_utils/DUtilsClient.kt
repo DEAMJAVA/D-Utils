@@ -55,7 +55,7 @@ object DUtilsClient : ClientModInitializer {
 
         ClientTickEvents.END_CLIENT_TICK.register { client ->
 
-            val window = client.window  // ✅ FIXED
+            val window = client.window
 
             val openPressedNow = InputConstants.isKeyDown(
                 window,

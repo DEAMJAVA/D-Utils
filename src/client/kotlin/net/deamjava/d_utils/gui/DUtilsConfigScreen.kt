@@ -1,7 +1,7 @@
 package net.deamjava.d_utils.gui
 
 import net.deamjava.d_utils.config.DUtilsConfig
-import net.minecraft.client.gui.GuiGraphics
+import net.minecraft.client.gui.GuiGraphicsExtractor
 import net.minecraft.client.gui.screens.Screen
 import net.minecraft.client.gui.components.Button
 import net.minecraft.client.gui.components.CycleButton
@@ -108,10 +108,10 @@ class DUtilsConfigScreen(private val parent: Screen?) : Screen(Component.transla
         )
     }
 
-    override fun render(context: GuiGraphics, mouseX: Int, mouseY: Int, delta: Float) {
-        super.render(context, mouseX, mouseY, delta)
+    override fun extractRenderState(graphics: GuiGraphicsExtractor, mouseX: Int, mouseY: Int, a: Float) {
+        super.extractRenderState(graphics, mouseX, mouseY, a)
         // Title
-        context.drawCenteredString(
+        graphics.centeredText(
             font,
             title,
             width / 2,
@@ -121,7 +121,7 @@ class DUtilsConfigScreen(private val parent: Screen?) : Screen(Component.transla
         // Status indicator
         val statusKey = if (config.protectionEnabled) "d_utils.status.enabled" else "d_utils.status.disabled"
         val statusColor = if (config.protectionEnabled) 0x55FF55 else 0xFF5555
-        context.drawCenteredString(
+        graphics.centeredText(
             font,
             Component.translatable(statusKey),
             width / 2,
